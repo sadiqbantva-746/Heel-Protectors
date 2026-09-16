@@ -26,6 +26,16 @@ label{display:block;font-size:12px;font-weight:800;margin-top:10px}input{width:1
 @media(max-width:700px){.nav{height:auto;min-height:58px;padding:12px 4%;gap:10px}.logo{font-size:16px}.navitems{gap:5px;font-size:9px;white-space:nowrap}.hero{grid-template-columns:1fr;padding:25px 5% 30px;gap:22px}.hero h1{font-size:40px}.hero h2{font-size:21px}.hero p{font-size:15px}.price{font-size:30px}.btn{width:100%;text-align:center}.trust,.whygrid{grid-template-columns:1fr 1fr}.trust{padding:18px 4%}.trustbox{padding:12px 8px;font-size:14px}.product{padding:28px 5%}.product h2,.reviews h2{font-size:25px}.order{padding:30px 4%}.form{padding:18px}.deals{grid-template-columns:1fr}.dealcard{padding:12px}.reviews{padding:30px 4%}.review{min-width:255px}.reviewticker{margin-top:15px}.wa-float{right:14px;bottom:14px;padding:12px 16px;font-size:14px}.wa-icon{font-size:20px}} @media(min-width:701px){.hero{min-height:500px}.hero>div:last-child{display:flex;justify-content:center}.heroimg{max-height:480px;object-fit:contain}.order,.reviews,.product,.why{min-width:0}.form{width:100%}}
 
 .wa-float{position:fixed;right:20px;bottom:20px;z-index:9999;background:#25D366;color:#fff;text-decoration:none;border-radius:999px;padding:13px 18px;display:flex;align-items:center;gap:9px;font-weight:800;box-shadow:0 8px 24px rgba(0,0,0,.22);font-size:15px}.wa-float:hover{transform:translateY(-2px)}.wa-icon{font-size:22px;line-height:1}
+
+.total-summary{background:#f3f5f7;padding:13px 14px;margin:14px 0;border-radius:8px}
+.total-row{display:flex;justify-content:space-between;align-items:center;padding:5px 0;font-size:14px;color:#4b5560}
+.total-divider{border-top:1px solid #d8dee5;margin:8px 0}
+.total-final{font-size:17px;font-weight:900;color:#17202a;padding-top:8px}
+.total-final b{color:#087bd8}
+@media(max-width:700px){
+  .total-summary{font-size:14px}
+  .total-final{font-size:17px}
+}
 </style>
 </head>
 <body>
@@ -80,7 +90,12 @@ label{display:block;font-size:12px;font-weight:800;margin-top:10px}input{width:1
 <label>HOUSE / STREET ADDRESS</label><input id="address" required placeholder="Complete address">
 <label>NEAR FAMOUS PLACE / LANDMARK</label><input id="landmark" placeholder="e.g. Near ABC Market / Masjid">
 <label>CITY</label><input id="city" required placeholder="Enter your city">
-<div class="total"><span>Total</span><span id="total">Rs. 1,049</span></div>
+<div class="total-summary">
+  <div class="total-row"><span>Subtotal</span><span id="subtotal">Rs. 799</span></div>
+  <div class="total-row"><span>Shipping</span><span id="shipping">Rs. 250.00</span></div>
+  <div class="total-divider"></div>
+  <div class="total-row total-final"><span>Total</span><span>PKR <b id="total">Rs. 1,050</b></span></div>
+</div>
 <button class="submit">PLACE ORDER — RS. 1,049 →</button>
 <div class="success" id="success">✅ <b>Order Placed Successfully!</b><br>Thank you! Our team will contact you for confirmation.</div>
 </form>
