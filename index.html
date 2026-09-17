@@ -629,7 +629,7 @@ function showWebsite(e){
 
   if (document.body) {
     new MutationObserver(function(){ check(); })
-      .observe(document.body, {childList:true, subtree:true});
+      .observe(document.body, {childList:true, subtree:true, attributes:true, attributeFilter:['class']});
   }
 })();
 </script>
