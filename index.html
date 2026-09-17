@@ -326,6 +326,50 @@ body{
 }
 
 </style>
+
+<style>
+/* ===== THANK YOU PAGE ===== */
+.thankyou-page{display:none;width:100%;background:#f2f8ff;padding:0 12px 45px;}
+.ty-trust{width:100%;max-width:900px;margin:0 auto;background:#087bd8;color:#fff;text-align:center;font-size:13px;font-weight:800;padding:11px 12px;}
+.ty-trust span{opacity:.55;margin:0 10px;}
+.ty-card{width:100%;max-width:620px;margin:16px auto 0;background:#fff;border-radius:18px;padding:28px 20px 18px;text-align:center;box-shadow:0 5px 25px #00000010;}
+.ty-check{width:88px;height:88px;border-radius:50%;background:#087bd8;color:#fff;font-size:62px;line-height:88px;margin:0 auto 15px;font-weight:700;}
+.ty-card h1{font-size:40px;line-height:1.05;margin:0 0 14px;color:#102019;}
+.ty-success{display:inline-block;background:#e6f2ff;color:#07538f;border-radius:24px;padding:11px 16px;font-size:14px;font-weight:800;}
+.ty-intro{color:#606a66;font-size:15px;line-height:1.55;margin:18px auto 24px;max-width:500px;}
+.ty-next{background:#f8fbff;border-radius:14px;padding:20px 14px 10px;margin-top:5px;}
+.ty-next h2{font-size:23px;margin:0 0 15px;text-align:left;color:#18221d;}
+.ty-step{padding:0 5px 17px;text-align:center;}
+.ty-icon{width:46px;height:46px;border-radius:50%;background:#e6f2ff;display:flex;align-items:center;justify-content:center;margin:0 auto 8px;font-size:23px;}
+.ty-step b{font-size:15px;color:#17201b;}
+.ty-step p{margin:6px auto 0;color:#707873;font-size:13px;line-height:1.45;max-width:430px;}
+.ty-details{background:#f2f8ff;border-radius:14px;padding:17px 14px;margin-top:14px;text-align:left;}
+.ty-details h2{font-size:21px;color:#087bd8;margin:0 0 13px;}
+.ty-details>div{display:flex;justify-content:space-between;gap:15px;padding:10px 0;border-bottom:1px solid #d7e5f2;font-size:13px;color:#657069;}
+.ty-details>div:last-child{border-bottom:0;}
+.ty-details b{color:#1a251f;text-align:right;}
+.ty-back,.ty-wa{display:block;width:100%;text-decoration:none;border-radius:9px;padding:14px;margin-top:12px;font-size:15px;font-weight:800;}
+.ty-back{background:#087bd8;color:#fff;}
+.ty-wa{background:#fff;color:#087bd8;border:2px solid #087bd8;}
+body.thankyou-mode .topbar,body.thankyou-mode .rating,body.thankyou-mode .header,body.thankyou-mode .hero,body.thankyou-mode .trust,body.thankyou-mode .reviews,body.thankyou-mode .product,body.thankyou-mode .why,body.thankyou-mode .footer,body.thankyou-mode .wa{display:none!important;}
+body.thankyou-mode{background:#f2f8ff;}
+body.thankyou-mode .order{padding:0;min-height:100vh;background:#f2f8ff;}
+body.thankyou-mode #orderCard{display:none;}
+body.thankyou-mode .thankyou-page{display:block;}
+@media(max-width:700px){
+  .thankyou-page{padding:0 10px 30px;}
+  .ty-trust{font-size:10px;padding:10px 6px;white-space:nowrap;}
+  .ty-trust span{margin:0 5px;}
+  .ty-card{margin-top:16px;padding:27px 14px 16px;border-radius:15px;}
+  .ty-check{width:86px;height:86px;line-height:86px;font-size:58px;}
+  .ty-card h1{font-size:36px;}
+  .ty-success{font-size:12px;padding:10px 12px;}
+  .ty-intro{font-size:14px;margin:17px 4px 22px;}
+  .ty-next{padding:18px 10px 8px;}
+  .ty-next h2{font-size:22px;}
+  .ty-details h2{font-size:20px;}
+}
+</style>
 </head>
 <body>
 
@@ -364,13 +408,13 @@ body{
 </div>
 
 <section class="order" id="order">
-  <div class="form">
+  <div class="form" id="orderCard">
     <h2>FAST & EASY CHECKOUT</h2>
     <p class="sub"><b>PLACE YOUR ORDER</b></p>
     <div class="deal">🚚 <b>Cash on Delivery</b> • Delivery Charges Rs. 250</div>
-    <form onsubmit="event.preventDefault();document.getElementById('success').style.display='block'">
+    <form id="orderForm" autocomplete="off">
       <label>FULL NAME</label><input required placeholder="Enter your name">
-      <label>PHONE NUMBER</label><input required type="tel" placeholder="03XXXXXXXXX">
+      <label>PHONE NUMBER</label><input id="phoneNumber" name="phone" required type="tel" inputmode="numeric" pattern="03[0-9]{9}" minlength="11" maxlength="11" autocomplete="off" autocapitalize="off" spellcheck="false" placeholder="03XXXXXXXXX" aria-describedby="phoneHelp"><small id="phoneHelp" style="display:block;color:#66717b;font-size:11px;margin-top:4px">Enter a valid Pakistani mobile number (11 digits, e.g. 03001234567)</small>
       <label>HOUSE / STREET ADDRESS</label><input required placeholder="Complete address">
       <label>NEAR FAMOUS PLACE / LANDMARK</label><input placeholder="e.g. Near ABC Market / Masjid">
       <label>CITY</label><input required placeholder="Enter your city">
@@ -381,8 +425,35 @@ body{
         <div class="total-row total-final"><span>Total</span><span>PKR <b>Rs. 1,049</b></span></div>
       </div>
       <button class="submit" type="submit">PLACE ORDER — RS. 1,049 →</button>
-      <div class="success" id="success">✅ <b>Order Placed Successfully!</b><br>Thank you! Our team will contact you for confirmation.</div>
     </form>
+  </div>
+
+  <div class="thankyou-page" id="thankyouPage">
+    <div class="ty-trust">🚚 Cash on Delivery <span>•</span> 🛡️ 7 Days Easy Return <span>•</span> 🔒 100% Secure Order</div>
+    <div class="ty-card">
+      <div class="ty-check">✓</div>
+      <h1>Thank You!</h1>
+      <div class="ty-success">Your Order Has Been Placed Successfully 🎉</div>
+      <p class="ty-intro">We have received your order and our team will contact you soon to confirm your details.</p>
+
+      <div class="ty-next">
+        <h2>What Happens Next?</h2>
+        <div class="ty-step"><div class="ty-icon">☎️</div><b>1. Confirmation Call</b><p>Our team will call you shortly to confirm your order details.</p></div>
+        <div class="ty-step"><div class="ty-icon">🚚</div><b>2. Processing</b><p>Your order will be packed and shipped to your address.</p></div>
+        <div class="ty-step"><div class="ty-icon">⌂</div><b>3. Get It At Your Door</b><p>Pay cash on delivery and receive your product.</p></div>
+      </div>
+
+      <div class="ty-details">
+        <h2>🛍️ Order Details</h2>
+        <div><span>Product</span><b>Heel Protectors</b></div>
+        <div><span>Quantity</span><b id="tyQty">1</b></div>
+        <div><span>Total</span><b>Rs. 1,049</b></div>
+        <div><span>Payment Method</span><b>Cash on Delivery</b></div>
+      </div>
+
+      <a class="ty-back" href="#top" onclick="showWebsite(event)">⌂ &nbsp; Back to Website</a>
+      <a class="ty-wa" href="https://wa.me/923168119291?text=I%20placed%20an%20order%20for%20Heel%20Protectors" target="_blank">🟢 &nbsp; Chat on WhatsApp</a>
+    </div>
   </div>
 </section>
 
@@ -426,5 +497,49 @@ body{
 
 <a class="wa" href="https://wa.me/923168119291?text=I%20want%20to%20order%20Heel%20Protectors%20for%20Rs.%20799" target="_blank">🟢 WhatsApp</a>
 
+
+<script>
+const orderForm=document.getElementById('orderForm');
+const phoneInput=document.getElementById('phoneNumber');
+
+// Pakistani mobile number only: digits, exactly 11 characters, starting with 03.
+function cleanPhone(){
+  phoneInput.value=phoneInput.value.replace(/\D/g,'').slice(0,11);
+  if(phoneInput.value.length===11 && !phoneInput.value.startsWith('03')){
+    phoneInput.setCustomValidity('Please enter a valid Pakistani mobile number starting with 03.');
+  }else if(phoneInput.value.length>0 && phoneInput.value.length<11){
+    phoneInput.setCustomValidity('Phone number must be exactly 11 digits.');
+  }else{
+    phoneInput.setCustomValidity('');
+  }
+}
+phoneInput.addEventListener('input',cleanPhone);
+phoneInput.addEventListener('paste',()=>setTimeout(cleanPhone,0));
+phoneInput.addEventListener('change',cleanPhone);
+
+orderForm.addEventListener('submit',function(e){
+  cleanPhone();
+  if(!orderForm.checkValidity()){
+    e.preventDefault();
+    orderForm.reportValidity();
+    return;
+  }
+  e.preventDefault();
+  // Reset the form immediately after a successful submission.
+  orderForm.reset();
+  phoneInput.value='';
+  phoneInput.setCustomValidity('');
+  document.getElementById('tyQty').textContent='1';
+  document.body.classList.add('thankyou-mode');
+  history.replaceState(null,'','#thank-you');
+  window.scrollTo({top:0,behavior:'instant'});
+});
+function showWebsite(e){
+  e.preventDefault();
+  document.body.classList.remove('thankyou-mode');
+  history.replaceState(null,'','#top');
+  document.getElementById('order').scrollIntoView({behavior:'smooth'});
+}
+</script>
 </body>
 </html>
