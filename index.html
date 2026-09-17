@@ -74,7 +74,7 @@ input{display:block;width:100%;height:46px;padding:11px;border:1px solid #ccd5df
 .whybox b{display:block;margin:7px}
 
 .footer{width:100%;padding:22px 15px;text-align:center;color:#777;font-size:12px;border-top:1px solid #eee}
-.wa{position:fixed;right:18px;bottom:18px;z-index:9999;background:#25d366;color:#fff;text-decoration:none;padding:13px 18px;border-radius:999px;font-weight:800;box-shadow:0 8px 24px #0003}
+
 
 @media(max-width:700px){
   .header{padding:12px 14px;flex-direction:column;gap:8px}
@@ -351,7 +351,7 @@ body{
 .ty-back,.ty-wa{display:block;width:100%;text-decoration:none;border-radius:9px;padding:14px;margin-top:12px;font-size:15px;font-weight:800;}
 .ty-back{background:#087bd8;color:#fff;}
 .ty-wa{background:#fff;color:#087bd8;border:2px solid #087bd8;}
-body.thankyou-mode .topbar,body.thankyou-mode .rating,body.thankyou-mode .header,body.thankyou-mode .hero,body.thankyou-mode .trust,body.thankyou-mode .reviews,body.thankyou-mode .product,body.thankyou-mode .why,body.thankyou-mode .footer,body.thankyou-mode .wa{display:none!important;}
+body.thankyou-mode .topbar,body.thankyou-mode .rating,body.thankyou-mode .header,body.thankyou-mode .hero,body.thankyou-mode .trust,body.thankyou-mode .reviews,body.thankyou-mode .product,body.thankyou-mode .why,body.thankyou-mode .footer{display:none!important;}
 body.thankyou-mode{background:#f2f8ff;}
 body.thankyou-mode .order{padding:0;min-height:100vh;background:#f2f8ff;}
 body.thankyou-mode #orderCard{display:none;}
@@ -370,8 +370,25 @@ body.thankyou-mode .thankyou-page{display:block;}
   .ty-details h2{font-size:20px;}
 }
 </style>
+
+<style>
+.processing-screen{display:none;position:fixed;inset:0;z-index:99999;background:rgba(255,255,255,.96);align-items:center;justify-content:center;text-align:center;}
+.processing-box{width:min(360px,88%);padding:34px 22px;border-radius:18px;background:#fff;box-shadow:0 10px 40px rgba(0,0,0,.12);}
+.processing-spinner{width:48px;height:48px;border:5px solid #dbeafe;border-top-color:#087bd8;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 18px;}
+.processing-box h2{margin:0 0 8px;color:#16231d;font-size:22px;}
+.processing-box p{margin:0;color:#68746d;font-size:14px;}
+@keyframes spin{to{transform:rotate(360deg)}}
+</style>
 </head>
 <body>
+<div class="processing-screen" id="processingScreen">
+  <div class="processing-box">
+    <div class="processing-spinner"></div>
+    <h2>Processing Your Order...</h2>
+    <p>Please wait a moment while we confirm your order.</p>
+  </div>
+</div>
+
 
 <div class="topbar"><div class="ticker">🔥 SPECIAL OFFER — HEEL PROTECTORS AT RS. 799 &nbsp; • &nbsp; 🚚 CASH ON DELIVERY &nbsp; • &nbsp; 🛡 EASY RETURN &nbsp; • &nbsp; ⭐ LIMITED TIME OFFER &nbsp; • &nbsp; ORDER NOW →</div></div>
 <div class="rating">★★★★★ 4.9/5 • 2,000+ Happy Customers • ✓ Verified</div>
@@ -495,7 +512,6 @@ body.thankyou-mode .thankyou-page{display:block;}
 
 <footer class="footer">© Heel Protectors • Cash on Delivery • Easy Return</footer>
 
-<a class="wa" href="https://wa.me/923168119291?text=I%20want%20to%20order%20Heel%20Protectors%20for%20Rs.%20799" target="_blank">🟢 WhatsApp</a>
 
 
 <script>
@@ -525,14 +541,19 @@ orderForm.addEventListener('submit',function(e){
     return;
   }
   e.preventDefault();
-  // Reset the form immediately after a successful submission.
+  // Show processing for 2 seconds, then open Thank You page.
+  const processingScreen=document.getElementById('processingScreen');
+  processingScreen.style.display='flex';
   orderForm.reset();
   phoneInput.value='';
   phoneInput.setCustomValidity('');
   document.getElementById('tyQty').textContent='1';
-  document.body.classList.add('thankyou-mode');
-  history.replaceState(null,'','#thank-you');
-  window.scrollTo({top:0,behavior:'instant'});
+  setTimeout(function(){
+    processingScreen.style.display='none';
+    document.body.classList.add('thankyou-mode');
+    history.replaceState(null,'','#thank-you');
+    window.scrollTo({top:0,behavior:'instant'});
+  },2000);
 });
 function showWebsite(e){
   e.preventDefault();
