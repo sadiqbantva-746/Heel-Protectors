@@ -515,6 +515,7 @@ body.thankyou-mode .thankyou-page{display:block;}
 
 
 <script>
+const GOOGLE_SHEET_URL='https://script.google.com/macros/s/AKfycbxK4VPLfPpE_fgkykA9n89XW7MJ7qZk7AajqTKJ09ZTUW9tFTP_XN9A4Tf3b6T0WjGMTg/exec';
 const orderForm=document.getElementById('orderForm');
 const phoneInput=document.getElementById('phoneNumber');
 
@@ -541,9 +542,26 @@ orderForm.addEventListener('submit',function(e){
     return;
   }
   e.preventDefault();
-  // Show processing for 2 seconds, then open Thank You page.
+  // Send order to Google Sheet, then show processing for 2 seconds.
   const processingScreen=document.getElementById('processingScreen');
   processingScreen.style.display='flex';
+  const fields=orderForm.querySelectorAll('input');
+  const orderData={
+    name: fields[0].value.trim(),
+    phone: phoneInput.value.trim(),
+    address: fields[2].value.trim(),
+    landmark: fields[3].value.trim(),
+    city: fields[4].value.trim(),
+    product: 'Heel Protectors',
+    quantity: '1',
+    price: '799',
+    shipping: '250',
+    total: '1049'
+  };
+  if(GOOGLE_SHEET_URL && !GOOGLE_SHEET_URL.includes('PASTE_GOOGLE')){
+    const body=new URLSearchParams(orderData).toString();
+    fetch(GOOGLE_SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},body}).catch(()=>{});
+  }
   orderForm.reset();
   phoneInput.value='';
   phoneInput.setCustomValidity('');
